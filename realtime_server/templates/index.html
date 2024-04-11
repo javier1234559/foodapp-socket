@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" />
+    <title>Food Ordering Dashboard</title>
+  </head>
+  <body>
+    <div class="title-container">
+      <h1 class="title">Order Table</h1>
+    </div>
+    <div class="table-container">
+      <table id="order-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Icon</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="order-body">
+          <!-- Orders will be dynamically added here -->
+          <!-- <tr>
+            <td>1</td>
+            <td><span>🎂</span></td>
+            <td><button class="change-status-btn">Change Status</button></td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

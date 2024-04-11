@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to food app</title>
+  </head>
+  <body>
+    <h1>Welcome to Food Ordering</h1>
+    <button></button>
+    <script>
+      // Hàm kiểm tra ứng dụng Food Ordering có được cài đặt hay không (sử dụng User Agent)
+      function isFoodOrderingAppInstalled() {
+        const userAgent = navigator.userAgent;
+        return userAgent.indexOf('FoodOrderingApp') !== -1;
+      }
+
+      // Lấy đối tượng nút "Đặt món"
+      const orderButton = document.getElementById('order-button');
+
+      // Thêm trình lắng nghe sự kiện click cho nút
+      orderButton.addEventListener('click', function () {
+        if (isFoodOrderingAppInstalled()) {
+          // Mở ứng dụng Food Ordering với thông tin nhà hàng (giả lập đơn giản)
+          window.location.href = 'foodordering://'; // Thay thế bằng URL thực nếu cần
+        } else {
+          // Chuyển hướng người dùng đến trang web đặt món của nhà hàng
+          window.location.href = 'https://www.restaurantwebsite.com/order'; // Cập nhật với URL thực
+        }
+      });
+    </script>
+  </body>
+</html>
