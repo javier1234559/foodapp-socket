@@ -13,7 +13,8 @@ data_products = [
         'name': 'Bánh mì',
         'price': 20000,
         'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/B%C3%A1nh_m%C3%AC_th%E1%BB%8Bt_n%C6%B0%E1%BB%9Bng.png/640px-B%C3%A1nh_m%C3%AC_th%E1%BB%8Bt_n%C6%B0%E1%BB%9Bng.png',
-    }, {
+    },
+    {
         'id': 2,
         'name': 'Bún riêu',
         'price': 30000,
@@ -41,13 +42,16 @@ order_lock = Lock()
 
 
 class Order:
-    def __init__(self, id, status, name, socket, product_id):
+    def __init__(self, id, name, image_product, price, status, socket, product_id):
         self.id = id
-        self.name = name
         self.product_id = product_id
         self.status = status
         self.socket = socket
-
+        self.name = name
+        self.image_product = image_product
+        self.price = price
+        
+        
     def send(self, message):
         self.socket.send(message)
 
@@ -58,15 +62,23 @@ class Order:
         return {
             'id': self.id,
             'name': self.name,
+            'image_product': self.image_product,
+            'price': self.price,
             'product_id': self.product_id,
             'status': self.status,
         }
+        
 
+def find_product_by_id(product_id):
+    for product in data_products:
+        if product['id'] == product_id:
+            return product
+    return None
 
+        
 @app.route('/products')
 def products():
     return jsonify(data_products)
-
 
 @sock.route('/orders/create')
 def createOrder(ws):
@@ -86,15 +98,23 @@ def createOrder(ws):
                     current_order_index = order_index
 
                 status = 'Pedding'
-                product_name = message.get('name')
                 product_id = message.get('product_id')
-                order = Order(order_index,
-                              status,
-                              product_name,
-                              ws, product_id)
+                product = find_product_by_id(product_id)
+                
+                
+                order = Order(
+                    id=current_order_index,
+                    name=product['name'],
+                    image_product=product['image'],
+                    price=product['price'],
+                    status=status,
+                    socket=ws,
+                    product_id=product_id
+                )
+                
                 order_list.append(order)
-
-                # ws.send(json.dumps({'order_index': current_order_index}))
+                ws.send('Order suscess with id: ' + str(current_order_index))
+                # ws.send(json.dumps({'status': 'Order suscess with id: ' + str(current_order_index)}))
     finally:
         if order is not None:
             order_list.remove(order)
@@ -109,7 +129,7 @@ def updateOrder():
     for order in order_list:
         if order.id == orderId:
             order.changeStatus(status)
-            order.send(status)
+            order.send('New status of order ' + str(orderId)+' : ' + status)
             return jsonify({"message": "update done"})
 
     return jsonify({"message": "update false"})

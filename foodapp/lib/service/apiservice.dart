@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../model/product.dart';
 
 class ApiService {
-  static const API_ENDPOINT = "http://192.168.1.109:3000";
+  static const API_ENDPOINT = "http://192.168.43.119:3000";
 
   static Future<List<Product>?> fetchProducts() async {
     final response = await http.get(Uri.parse('$API_ENDPOINT/products'));

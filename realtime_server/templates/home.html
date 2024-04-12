@@ -3,31 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" />
     <title>Welcome to food app</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+      .video-background video {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
   </head>
   <body>
-    <h1>Welcome to Food Ordering</h1>
-    <button></button>
+    <div class="video-background">
+      <video autoplay loop muted>
+        <source src="https://cdn.pixabay.com/video/2016/02/29/2339-157269920_large.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <section class="landing_container">
+      <div>
+        <h1 class="title_home">Welcome to Food Ordering</h1>
+        <p class="description">Indulge in a seamless culinary experience with our food ordering app. Browse through a wide array of delectable dishes from your favorite restaurants, place your order with ease, and receive real-time notifications about the status of your order.</p>
+        <button onclick="openApp()">Get Started</button>
+      </div>
+    </section>
     <script>
-      // Hàm kiểm tra ứng dụng Food Ordering có được cài đặt hay không (sử dụng User Agent)
-      function isFoodOrderingAppInstalled() {
-        const userAgent = navigator.userAgent;
-        return userAgent.indexOf('FoodOrderingApp') !== -1;
+      function openApp() {
+        var deepLinkUrl = 'logrckt://unilinks.example.com';
+        var fallbackUrl = 'http://192.168.1.109:3000/orders';
+
+        // Attempt to open the app using the deep link
+        window.location.replace(deepLinkUrl);
+
+        // Set a timeout to redirect to the fallback URL if the app does not open
+        setTimeout(function () {
+          window.location.replace(fallbackUrl);
+        }, 500);
       }
-
-      // Lấy đối tượng nút "Đặt món"
-      const orderButton = document.getElementById('order-button');
-
-      // Thêm trình lắng nghe sự kiện click cho nút
-      orderButton.addEventListener('click', function () {
-        if (isFoodOrderingAppInstalled()) {
-          // Mở ứng dụng Food Ordering với thông tin nhà hàng (giả lập đơn giản)
-          window.location.href = 'foodordering://'; // Thay thế bằng URL thực nếu cần
-        } else {
-          // Chuyển hướng người dùng đến trang web đặt món của nhà hàng
-          window.location.href = 'https://www.restaurantwebsite.com/order'; // Cập nhật với URL thực
-        }
-      });
     </script>
   </body>
 </html>

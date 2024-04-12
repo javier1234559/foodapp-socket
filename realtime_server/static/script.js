@@ -1,25 +1,23 @@
-const order_lists = []
+
 
 const fetchOrder = () => {
     fetch('/orders/all')
         .then(response => response.json())
         .then(data => {
-            // Get the tbody element where orders will be displayed
             const orderBody = document.getElementById('order-body');
-
-            // Clear existing content
             orderBody.innerHTML = '';
             console.log(data)
-            // Iterate over the orders data and create table rows
-            
-            order_lists
+
             data.data.forEach(order => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${order.id}</td>
-                    <td><span>🎂</span></td>
-                    <td><button class="change-status-btn" data-order-id="${order.id}" onclick="updateOrderStatus(${order.id}, '${order.status}')">${order.status}</button></td>
-                `;
+                <td>${order?.id}</td>
+                <td><img src="${order?.image_product}" alt="Product Image" width="50"></td>
+                <td>${order?.name}</td>
+                <td>${order?.price}</td>
+                <td>${order?.product_id}</td>
+                <td><button class="change-status-btn" data-order-id="${order?.id}" onclick="updateOrderStatus(${order?.id}, '${order?.status}')">${order?.status}</button></td>
+            `;
                 orderBody.appendChild(row);
             });
         })

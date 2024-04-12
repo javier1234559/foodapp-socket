@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/screens/homescreen.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:false,
       title: 'Food app',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       home: HomeScreen(),
     );

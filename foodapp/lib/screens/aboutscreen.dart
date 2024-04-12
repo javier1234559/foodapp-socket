@@ -20,11 +20,11 @@ class AboutScreen extends StatelessWidget {
               ),
               ListTile(
                 title: Text('Họ và tên: Trần Thanh Huệ'),
-                subtitle: Text('MSSV: 2011'),
+                subtitle: Text('MSSV: 20110490'),
               ),
               ListTile(
-                title: Text('Họ và tên: Trần Thanh Huệ'),
-                subtitle: Text('MSSV: 2011'),
+                title: Text('Họ và tên: Cao Thọ Phú Thịnh'),
+                subtitle: Text('MSSV: 21144449'),
               )
             ],
           ),

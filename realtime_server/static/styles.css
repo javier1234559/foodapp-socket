@@ -7,8 +7,8 @@
 
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #212121;
+  color: #f4f4f4;
   line-height: 1.6;
   margin-top: 50px;
 }
@@ -41,8 +41,9 @@ body {
 }
 
 #order-table th {
-  background-color: #ccc;
+  background-color: #cecee6;
   padding: 10px;
+  color: #272a30;
 }
 
 #order-table td {
@@ -51,17 +52,17 @@ body {
 }
 
 #order-table tbody tr:hover {
-  background-color: #f2f2f2;
+  background-color: #474747;
   transition: background-color 0.3s ease;
 }
 
 #order-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #474747;
 }
 
 .change-status-btn {
   padding: 8px 16px;
-  background-color: #76be68;
+  background-color: #7dd98c;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -70,5 +71,50 @@ body {
 }
 
 .change-status-btn:hover {
+  background-color: #76be68;
+}
+
+
+.landing_container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+ 
+}
+
+.landing_container > div {
+  background-color: #252525e1;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.title_home {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #f4f4f4;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  max-width: 800px;
+  color: #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #7dd98c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
   background-color: #76be68;
 }
